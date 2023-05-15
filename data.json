@@ -1,0 +1,50 @@
+{
+  "t": "READY",
+  "s": 1,
+  "op": 0,
+  "d": {
+    "_trace": [
+      ["gateway-prd-us-east1-c-x9k6",{"micros":91193,"calls":["id_created",{"micros":1457,"calls":[]},"session_lookup_time",{"micros":4803,"calls":[]},"session_lookup_finished",{"micros":19,"calls":[]},"discord-sessions-prd-2-2",{"micros":84151,"calls":["start_session",{"micros":67748,"calls":["discord-api-7879dc947d-kgzxq",{"micros":62938,"calls":["get_user",{"micros":10630},"get_guilds",{"micros":10313},"send_scheduled_deletion_message",{"micros":11},"guild_join_requests",{"micros":200},"authorized_ip_coro",{"micros":12}]}]},"starting_guild_connect",{"micros":45,"calls":[]},"presence_started",{"micros":1545,"calls":[]},"guilds_started",{"micros":84,"calls":[]},"guilds_connect",{"micros":2,"calls":[]},"presence_connect",{"micros":14683,"calls":[]},"connect_finished",{"micros":14688,"calls":[]},"build_ready",{"micros":18,"calls":[]},"clean_ready",{"micros":0,"calls":[]},"optimize_ready",{"micros":21,"calls":[]},"split_ready",{"micros":1,"calls":[]}]}]}]
+    ],
+    "application": {
+      "flags": 27262976,
+      "id": "1066464723689816214"
+    },
+    "geo_ordered_rtc_regions": [
+      "frankfurt",
+      "rotterdam",
+      "milan",
+      "stockholm",
+      "madrid"
+    ],
+    "guild_join_requests": [],
+    "guilds": [
+      {
+        "id": "1066465107200188417",
+        "unavailable": true
+      }
+    ],
+    "presences": [],
+    "private_channels": [],
+    "relationships": [],
+    "resume_gateway_url": "wss://gateway-us-east1-c.discord.gg",
+    "session_id": "26d7eddfde848a4437c564c6643baa63",
+    "session_type": "normal",
+    "user": {
+      "avatar": null,
+      "bot": true,
+      "discriminator": "5757",
+      "display_name": null,
+      "email": null,
+      "flags": 524288,
+      "global_name": null,
+      "id": "1066464723689816214",
+      "mfa_enabled": true,
+      "public_flags": 524288,
+      "username": "TimeOfTest",
+      "verified": true
+    },
+    "user_settings": {},
+    "v": 6
+  }
+}

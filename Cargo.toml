@@ -14,3 +14,5 @@ tokio = { version = "1.23.0", features = ["full"] }
 futures = "0.3.28"
 serde_json = "1.0.96"
 dotenv = "0.15.0"
+serde = { version ="1.0.160", features = ["derive"] }
+reqwest = {  version = "0.11.17", features = ["json", "blocking"] }

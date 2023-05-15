@@ -1,0 +1,36 @@
+{
+  "channel_id": "1066465107665748132",
+  "deaf": false,
+  "guild_id": "1066465107200188417",
+  "member": {
+    "avatar": null,
+    "communication_disabled_until": null,
+    "deaf": false,
+    "flags": 0,
+    "joined_at": "2023-01-21T21:11:35.587000+00:00",
+    "mute": false,
+    "nick": null,
+    "pending": false,
+    "premium_since": null,
+    "roles": [],
+    "user": {
+      "avatar": "855bbf5b79521a1538cd750dd8726f9a",
+      "avatar_decoration": null,
+      "bot": false,
+      "discriminator": "7777",
+      "display_name": null,
+      "global_name": null,
+      "id": "795306274467348510",
+      "public_flags": 4194368,
+      "username": "Time"
+    }
+  },
+  "mute": false,
+  "request_to_speak_timestamp": null,
+  "self_deaf": false,
+  "self_mute": true,
+  "self_video": false,
+  "session_id": "2b38a8f5aa69e8546afcf72dec45f48d",
+  "suppress": false,
+  "user_id": "795306274467348510"
+}

@@ -1,8 +1,7 @@
-use std::{fs::File, io::Write, time::Duration};
+use std::time::Duration;
 
 use dotenv::dotenv;
 use futures::{SinkExt, StreamExt};
-use opcodes_types::{Event, Hello, Ready, VoiceStateUpdate};
 use serde::de::DeserializeOwned;
 use serde_json::Value;
 
@@ -18,9 +17,7 @@ use tokio_tungstenite::{
 // use tungstenite::{connect, Message};
 use url::Url;
 
-mod voice;
-
-mod opcodes_types;
+use crate::opcodes_types::Event;
 
 async fn connect() -> Result<
     tokio_tungstenite::WebSocketStream<tokio_tungstenite::MaybeTlsStream<tokio::net::TcpStream>>,
@@ -66,12 +63,26 @@ async fn event_generater(message: Message) {
 
     match json.op {
         0 => event_manger(json.clone()).await,
-        10 => hello(change_d(json.d)).await,
-        11 => heartbeat_refreshed(json.clone()).await,
+        // 10 => hello(change_d(json.d)).await,
+        // 11 => heartbeat_refreshed(json.clone()).await,
         _ => println!("Undefined OpCode: {:?}", json.op),
     }
 
     // println!("{:?}", json);
+}
+
+async fn event_manger(text: Event) {
+    // println!("T {:?}", text.t.as_deref().unwrap_or_default());
+
+    // return;
+
+    match text.t.as_deref().unwrap_or_default() {
+        // "READY" => on_ready(change_d(text.d)).await,
+        // "GUILD_CREATE" => on_guild_create(change_d(text.d)).await,
+        // "MESSAGE_CREATE" => on_message(change_d(text.d)).await,
+        // "VOICE_STATE_UPDATE" => on_voice_state_update(change_d(text.d)).await,
+        _ => println!("Unkown Event {:?}", text.t.as_deref().unwrap_or_default()),
+    };
 }
 
 fn change_d<T: DeserializeOwned>(d: Option<Value>) -> T {
@@ -79,7 +90,6 @@ fn change_d<T: DeserializeOwned>(d: Option<Value>) -> T {
     new_d
 }
 
-#[allow(dead_code)]
 fn change_event_type<T: DeserializeOwned>(opcode: Event) -> Event<T> {
     let new_struct = Event::<T> {
         t: opcode.t,
@@ -91,69 +101,7 @@ fn change_event_type<T: DeserializeOwned>(opcode: Event) -> Event<T> {
     new_struct
 }
 
-async fn event_manger(text: Event) {
-    // println!("T {:?}", text.t.as_deref().unwrap_or_default());
-
-    // return;
-
-    match text.t.as_deref().unwrap_or_default() {
-        "READY" => on_ready(change_d(text.d)).await,
-        "GUILD_CREATE" => on_guild_create(change_d(text.d)).await,
-        "MESSAGE_CREATE" => on_message(change_d(text.d)).await,
-        "VOICE_STATE_UPDATE" => on_voice_state_update(change_d(text.d)).await,
-        _ => println!("Unkown Event {:?}", text.t.as_deref().unwrap_or_default()),
-    };
-}
-
-async fn hello(hello: Hello) {
-    println!("Connection opened {:?}", hello.heartbeat_interval)
-}
-
-async fn heartbeat_refreshed(_text: Event) {
-    println!("Heartbeat refreshed")
-}
-
-async fn on_ready(ready: Ready) {
-    println!("READY: {:?}", ready.user.username)
-
-    // let _data = serde_json::to_string_pretty(&text)
-    //     .unwrap()
-    //     .replace("\\", "");
-
-    // let mut _file = File::create("data.json").unwrap();
-    // _file.write_all(_data.as_bytes()).unwrap();
-}
-
-async fn on_voice_state_update(state: VoiceStateUpdate) {
-    match state.channel_id.as_deref().unwrap_or_default() {
-        "" => println!("TODO Leave function"),
-        "1066465107665748132" => voice::on_voice_channel_create(state).await,
-        _ => return,
-    }
-
-    // if ()
-}
-
-async fn on_guild_create(_text: Value) {
-    // println!("READY: {:?}", ready.user.username)
-    let _data = serde_json::to_string_pretty(&_text)
-        .unwrap()
-        .replace("\\", "");
-
-    let mut _file = File::create("dataGC.json").unwrap();
-    _file.write_all(_data.as_bytes()).unwrap();
-}
-
-async fn on_message(_ctx: Value) {
-    // println!("{:?}")
-}
-
-// async fn on_
-
-#[tokio::main]
-async fn main() {
-    dotenv().ok();
-
+pub async fn client() {
     let (mut send, mut read) = connect().await.unwrap().split();
 
     let (tx, mut rx) = tokio::sync::mpsc::channel::<Message>(100);
